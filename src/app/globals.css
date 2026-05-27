@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #fafafa;
+  --bg-card: #ffffff;
+  --fg: #18181b;
+  --fg-muted: #71717a;
+  --fg-light: #a1a1aa;
+  --border: #e4e4e7;
+  --border-light: #f4f4f5;
+  --primary: #18181b;
+  --primary-hover: #27272a;
+  --bubble-user: #f4f4f5;
+  --bubble-ai: #ffffff;
+  --radius-pill: 9999px;
+  --radius-card: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+}
+
+body {
+  color: var(--fg);
+  background: var(--bg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif {
+  font-family: var(--font-serif), 'Georgia', 'Times New Roman', serif;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+}
+
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: white;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  .btn-primary:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: var(--fg);
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-secondary:hover {
+    background: var(--border-light);
+    border-color: var(--fg-light);
+  }
+  .btn-secondary:active {
+    transform: scale(0.985);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--fg-muted);
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    font-weight: 500;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-ghost:hover {
+    background: var(--border-light);
+    color: var(--fg);
+  }
+
+  .card {
+    background: var(--bg-card);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: var(--bg-card);
+    font-size: 14px;
+    color: var(--fg);
+    transition: all 0.2s ease;
+    outline: none;
+  }
+  .input-field:focus {
+    border-color: var(--fg-light);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+  }
+  .input-field::placeholder {
+    color: var(--fg-light);
+  }
+
+  .section-title {
+    font-family: var(--font-serif), 'Georgia', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+
+  .text-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--fg-muted);
+  }
+}
+
+/* Animations — minimal */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease both;
+}
+.animate-fade-in-scale {
+  animation: fadeInScale 0.3s ease both;
+}
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+
+.cursor-blink::after {
+  content: '▍';
+  animation: blink 1s infinite;
+  color: var(--fg-muted);
+}
+
+/* Scrollbar — minimal */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-light); }
+
+::selection {
+  background: var(--border-light);
+  color: var(--fg);
+}

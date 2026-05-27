@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f4f6f9;
+  --primary: #3d7695;
+  --primary-hover: #356a85;
+  --accent: #C85E3D;
+  --accent-hover: #b45537;
+  --text: #1d1d1f;
+  --text-black: #000;
+  --white: #fff;
+  --border: #e2e5ea;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.14);
+  --radius: 24px;
+  --spacing: 8px;
+  --nav-height: 64px;
+  --transition: 0.3s ease-out;
+}
+
+html { color-scheme: light; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 calc(var(--spacing) * 4);
+  z-index: 100;
+  transition: box-shadow var(--transition);
+}
+.navbar.scrolled { box-shadow: var(--shadow-md); }
+
+.navbar .logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-black);
+  letter-spacing: -0.3px;
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: calc(var(--spacing) * 4);
+  list-style: none;
+}
+.navbar .nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 15px;
+  transition: color var(--transition);
+}
+.navbar .nav-links a:hover { color: var(--primary); }
+
+/* ===== Layout ===== */
+.page-wrap {
+  padding-top: calc(var(--nav-height) + var(--spacing) * 4);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 calc(var(--spacing) * 3);
+}
+
+.section { margin-bottom: calc(var(--spacing) * 6); }
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-black);
+  margin-bottom: calc(var(--spacing) * 3);
+  letter-spacing: -0.5px;
+}
+
+/* ===== Cards ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: calc(var(--spacing) * 3);
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: calc(var(--spacing) * 3);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+  will-change: transform;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-black);
+  margin-bottom: calc(var(--spacing) * 1);
+}
+
+.card p { font-size: 14px; color: var(--text); }
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
+  cursor: pointer;
+  transition: transform 0.1s, background var(--transition), box-shadow var(--transition);
+  will-change: transform;
+}
+.btn:active { transform: scale(0.95); }
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+.btn-accent:hover {
+  background: var(--accent-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+.btn-outline:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.btn-group {
+  display: flex;
+  gap: calc(var(--spacing) * 1.5);
+  flex-wrap: wrap;
+  margin-top: calc(var(--spacing) * 2);
+}
+
+/* ===== Inputs ===== */
+.form-group { margin-bottom: calc(var(--spacing) * 2); }
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-black);
+  margin-bottom: calc(var(--spacing) * 0.5);
+}
+
+.input {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  padding: calc(var(--spacing) * 1.5);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) / 2);
+  background: var(--white);
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200,94,61,0.2);
+}
+
+/* ===== Table ===== */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
+  border-bottom: 2px solid var(--border);
+}
+
+.table td {
+  padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.table tr:last-child td { border-bottom: none; }
+
+.table tr { transition: background var(--transition); }
+.table tbody tr:hover { background: #f8f9fb; }
+
+/* ===== Tags ===== */
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px calc(var(--spacing) * 1.5);
+  border-radius: calc(var(--radius) / 2);
+  border: 1px solid;
+}
+
+.tag-success { color: #2d8a56; border-color: #2d8a56; background: rgba(45,138,86,0.06); }
+.tag-warning { color: #c2800a; border-color: #c2800a; background: rgba(194,128,10,0.06); }
+.tag-error   { color: #c85e3d; border-color: #c85e3d; background: rgba(200,94,61,0.06); }
+.tag-info    { color: #3d7695; border-color: #3d7695; background: rgba(61,118,149,0.06); }
+
+/* ===== Notification Toast ===== */
+.toast-container {
+  position: fixed;
+  top: calc(var(--nav-height) + var(--spacing) * 2);
+  right: calc(var(--spacing) * 3);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 1);
+}
+
+.toast {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
+  box-shadow: var(--shadow-lg);
+  font-size: 14px;
+  font-weight: 500;
+  animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s forwards;
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 1);
+}
+
+.toast .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.toast-success .dot { background: #2d8a56; }
+.toast-error .dot { background: #c85e3d; }
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ===== Animations ===== */
+.entrance {
+  animation: entranceIn 0.5s ease-out both;
+}
+@keyframes entranceIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1);   }
+}
+
+/* staggered entrance for cards */
+.card-grid .card:nth-child(1) { animation-delay: 0.05s; }
+.card-grid .card:nth-child(2) { animation-delay: 0.12s; }
+.card-grid .card:nth-child(3) { animation-delay: 0.19s; }
+.card-grid .card:nth-child(4) { animation-delay: 0.26s; }
+
+/* Skeleton/Pulse loading */
+.skeleton {
+  background: linear-gradient(90deg, #e5e7eb 25%, #f0f1f3 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: pulse 1.5s ease-in-out infinite;
+  border-radius: calc(var(--radius) / 2);
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+.skeleton-line { height: 14px; margin-bottom: calc(var(--spacing) * 1); }
+.skeleton-line:last-child { width: 60%; }
+
+/* Checkmark SVG animation */
+.checkmark-wrap {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 1);
+  color: #2d8a56;
+  font-weight: 600;
+  font-size: 14px;
+}
+.checkmark-wrap svg { width: 24px; height: 24px; }
+
+.checkmark-wrap svg .check-path {
+  stroke: #2d8a56;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: drawCheck 0.5s ease-out forwards;
+}
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Page fade transition */
+.page-fade { animation: pageFade 0.3s ease-out; }
+@keyframes pageFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ===== Misc ===== */
+.inline-stats {
+  display: flex;
+  gap: calc(var(--spacing) * 4);
+  flex-wrap: wrap;
+  margin-bottom: calc(var(--spacing) * 4);
+}
+.stat {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
+  box-shadow: var(--shadow-sm);
+  min-width: 140px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.stat:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.stat .stat-value { font-size: 28px; font-weight: 700; color: var(--text-black); }
+.stat .stat-label { font-size: 13px; font-weight: 500; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+
+.form-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: calc(var(--spacing) * 3);
+  box-shadow: var(--shadow-sm);
+  max-width: 520px;
+}
+</style>
+</head>
+<body class="page-fade">
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">Design System</div>
+  <ul class="nav-links">
+    <li><a href="#">概览</a></li>
+    <li><a href="#">组件</a></li>
+    <li><a href="#">数据</a></li>
+    <li><a href="#">设置</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="container">
+
+    <!-- Stats -->
+    <div class="section entrance">
+      <h2 class="section-title">概览</h2>
+      <div class="inline-stats">
+        <div class="stat">
+          <div class="stat-value">1,284</div>
+          <div class="stat-label">活跃用户</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">96.4%</div>
+          <div class="stat-label">正常运行</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">¥42.8K</div>
+          <div class="stat-label">月收入</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">8</div>
+          <div class="stat-label">进行中项目</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="section entrance">
+      <h2 class="section-title">项目进展</h2>
+      <div class="card-grid">
+        <div class="card entrance">
+          <h3>用户中心重构</h3>
+          <p>全面升级用户界面与交互体验，优化核心流程的性能与可用性。</p>
+          <div style="margin-top:16px">
+            <span class="tag tag-info">进行中</span>
+          </div>
+        </div>
+        <div class="card entrance">
+          <h3>支付系统集成</h3>
+          <p>接入新的支付网关，支持多种支付方式，提升交易成功率。</p>
+          <div style="margin-top:16px">
+            <span class="tag tag-success">已完成</span>
+          </div>
+        </div>
+        <div class="card entrance">
+          <h3>数据分析平台</h3>
+          <p>构建实时数据看板，为业务决策提供可视化洞察支持。</p>
+          <div style="margin-top:16px">
+            <span class="tag tag-warning">待审核</span>
+          </div>
+        </div>
+        <div class="card entrance">
+          <h3>API 网关升级</h3>
+          <p>迁移至新一代网关架构，提升吞吐量并降低延迟。</p>
+          <div style="margin-top:16px">
+            <span class="tag tag-error">阻塞</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="section entrance">
+      <h2 class="section-title">最近交易</h2>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>交易 ID</th>
+              <th>客户</th>
+              <th>金额</th>
+              <th>状态</th>
+              <th>日期</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#TXN-4829</td>
+              <td>张明</td>
+              <td>¥1,280.00</td>
+              <td><span class="tag tag-success">成功</span></td>
+              <td>2026-05-27</td>
+            </tr>
+            <tr>
+              <td>#TXN-4828</td>
+              <td>李华</td>
+              <td>¥3,450.00</td>
+              <td><span class="tag tag-success">成功</span></td>
+              <td>2026-05-27</td>
+            </tr>
+            <tr>
+              <td>#TXN-4827</td>
+              <td>王芳</td>
+              <td>¥860.00</td>
+              <td><span class="tag tag-warning">处理中</span></td>
+              <td>2026-05-26</td>
+            </tr>
+            <tr>
+              <td>#TXN-4826</td>
+              <td>赵磊</td>
+              <td>¥5,200.00</td>
+              <td><span class="tag tag-error">失败</span></td>
+              <td>2026-05-26</td>
+            </tr>
+            <tr>
+              <td>#TXN-4825</td>
+              <td>陈雪</td>
+              <td>¥2,150.00</td>
+              <td><span class="tag tag-success">成功</span></td>
+              <td>2026-05-25</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Buttons & Form -->
+    <div class="section entrance" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <h2 class="section-title">操作</h2>
+        <div class="card">
+          <h3>按钮样式</h3>
+          <div class="btn-group">
+            <button class="btn btn-primary">主要操作</button>
+            <button class="btn btn-accent">强调操作</button>
+            <button class="btn btn-outline">次要操作</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title">快速输入</h2>
+        <div class="form-card">
+          <div class="form-group">
+            <label for="name">姓名</label>
+            <input id="name" class="input" type="text" placeholder="请输入姓名">
+          </div>
+          <div class="form-group">
+            <label for="email">邮箱</label>
+            <input id="email" class="input" type="email" placeholder="请输入邮箱">
+          </div>
+          <button class="btn btn-primary" style="width:100%" onclick="showToast()">提交</button>
+          <div class="checkmark-wrap" id="checkmark" style="display:none;margin-top:16px">
+            <svg viewBox="0 0 24 24"><path class="check-path" d="M5 13l4 4L19 7"/></svg>
+            提交成功
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skeleton Loading Demo -->
+    <div class="section entrance">
+      <h2 class="section-title">加载状态</h2>
+      <div class="card" style="max-width:400px">
+        <div class="skeleton skeleton-line" style="width:40%"></div>
+        <div class="skeleton skeleton-line" style="width:90%"></div>
+        <div class="skeleton skeleton-line" style="width:75%"></div>
+        <div class="skeleton skeleton-line"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// Toast notification
+function showToast() {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'toast toast-success';
+  toast.innerHTML = '<span class="dot"></span> 操作已成功完成';
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+
+  // Show checkmark
+  const ck = document.getElementById('checkmark');
+  ck.style.display = 'flex';
+  // Re-trigger animation
+  const path = ck.querySelector('.check-path');
+  path.style.animation = 'none';
+  path.offsetHeight;
+  path.style.animation = 'drawCheck 0.5s ease-out forwards';
+}
+</script>
+
+</body>
+</html>
