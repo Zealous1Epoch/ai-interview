@@ -1,5 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
+一个无需注册、打开即用的 AI 面试模拟 Web 应用。用户填写目标岗位和简历后，AI 面试官按"自我介绍 → 项目深挖 → 技术问答 → 行为问题 → 反问"五个阶段进行模拟面试，结束后自动生成多维度评估报告，并支持针对弱项进行专项练习。
 ## Getting Started
 
 First, run the development server:
